@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray_70">#EEEEEE</color>
+    <color name="gray_410">#979797</color>
+    <color name="status_bar">#FF880E4F</color>
+    <color name="app_bar">#FFF50057</color>
+    <color name="navigation_bar_color" type="material">#880E4FFF</color>
+    <color name="status_bar_color" type="material">#FF880E4F</color>
+    <color name="material_color" type="material material-accent">#F50057</color>
+    <color name="crimson_red" type="material">#CF2A2A</color>
+    <color name="yellow_ocher" type="material material-accent">#DF9527</color>
+    <color name="material_indigo" type="material material-accent">#FF3F51B5</color>
+
+    <color name="menu_setting">#FF20A185</color>
+    <color name="menu_doctor">#FF5090BE</color>
+    <color name="menu_task">#FFC7453E</color>
+    <color name="menu_store">#FF60A750</color>
+    <color name="menu_event">#FFD718DA</color>
+    <color name="menu_message">#FFC9BC07</color>
+
+</resources>
