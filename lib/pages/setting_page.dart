@@ -4,9 +4,10 @@ import 'package:get/get.dart';
 import 'package:select_dialog/select_dialog.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:time_zone_list/time_zone_list.dart';
-import 'package:wakelock/wakelock.dart';
+// import 'package:wakelock/wakelock.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../gen/colors.gen.dart';
 import '../public/modeles.dart';
@@ -237,7 +238,7 @@ class _SettingPageState extends State<SettingPage> {
                       activeSwitchColor: Colors.red,
                       onToggle: (val) {
                         Globals.prefs.setBool(Globals.prfWakeUp, val);
-                        Wakelock.toggle(enable: val);
+                        WakelockPlus.toggle(enable: val);
                         setState(() {});
                       },
                       title: Text('WakeUp'.tr)),
@@ -271,7 +272,7 @@ class _SettingPageState extends State<SettingPage> {
                       activeSwitchColor: Colors.red,
                       onToggle: (val) {
                         Globals.prefs.setBool(Globals.prfTaskScrollPage, val);
-                        Wakelock.toggle(enable: val);
+                        WakelockPlus.toggle(enable: val);
                         setState(() {});
                       },
                       leading: const Icon(Icons.compare_arrows_sharp),
@@ -355,7 +356,7 @@ class _SettingPageState extends State<SettingPage> {
                       activeSwitchColor: Colors.red,
                       onToggle: (val) {
                         Globals.prefs.setBool(Globals.prfEmployerExpand, val);
-                        Wakelock.toggle(enable: val);
+                        WakelockPlus.toggle(enable: val);
                         setState(() {});
                       },
                       leading: const Icon(Icons.expand),

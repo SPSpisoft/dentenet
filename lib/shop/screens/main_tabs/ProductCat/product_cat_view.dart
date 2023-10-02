@@ -13,7 +13,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:progress_indicators/progress_indicators.dart';
-import 'package:scroll_app_bar/scroll_app_bar.dart';
+import 'package:scroll_app_bar_2_0_0_custom_fix/scroll_app_bar.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:sp_keyboard_shortcut_ns/sp_keyboard_shortcut_ns.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
@@ -463,9 +463,9 @@ class _ProductCatViewState extends State<ProductCatView>
                   : 1,
               controller: widget.mScrollController,
               interactive: true,
-              isAlwaysShown: kIsWeb &&
-                  (defaultTargetPlatform == TargetPlatform.windows ||
-                      defaultTargetPlatform == TargetPlatform.linux),
+              // isAlwaysShown: kIsWeb &&
+              //     (defaultTargetPlatform == TargetPlatform.windows ||
+              //         defaultTargetPlatform == TargetPlatform.linux),
               child: StaggeredGridView.countBuilder(
                 padding: EdgeInsets.only(
                     left: 0.01.sw,

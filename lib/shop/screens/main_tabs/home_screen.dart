@@ -84,9 +84,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   ? 15
                   : 1,
               controller: _controller,
-              isAlwaysShown: kIsWeb &&
-                  (defaultTargetPlatform == TargetPlatform.windows ||
-                      defaultTargetPlatform == TargetPlatform.linux),
+              // isAlwaysShown: kIsWeb &&
+              //     (defaultTargetPlatform == TargetPlatform.windows ||
+              //         defaultTargetPlatform == TargetPlatform.linux),
               child: CustomScrollView(
                 controller: _controller,
                 physics: const BouncingScrollPhysics(),

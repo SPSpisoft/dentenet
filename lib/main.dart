@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:eticon_api/eticon_api.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
@@ -42,13 +40,13 @@ import 'shop/main_shop.dart';
 
 Future<void> main() async {
   HttpOverrides.global = HttpOverrideSSL();
-  await Api.init(
-    urls: [Globals.baseApiAddressDental],
-    enableUtf8Decoding: true,
-    //   onAllError: (err) {
-    //     if (err.code == 401) Get.offAll(() => ToastNormal("", context));
-    // }
-  );
+  // await Api.init(
+  //   urls: [Globals.baseApiAddressDental],
+  //   enableUtf8Decoding: true,
+  //   //   onAllError: (err) {
+  //   //     if (err.code == 401) Get.offAll(() => ToastNormal("", context));
+  //   // }
+  // );
   WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.remove();
   tz.initializeTimeZones();
@@ -152,6 +150,7 @@ class MyApp extends StatelessWidget {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return GetMaterialApp(
+
           debugShowCheckedModeBanner: false,
           useInheritedMediaQuery: true,
           // translations: WordsTranslations(),
@@ -206,6 +205,8 @@ class MyApp extends StatelessWidget {
             primarySwatch: ColorName.navigationBarColor,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
+          darkTheme: ThemeData.dark(),
+
           // home: const MyHomePage(),
         );
       },

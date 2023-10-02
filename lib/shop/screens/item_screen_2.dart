@@ -798,8 +798,9 @@ class _ItemScreen2State extends State<ItemScreen2> {
                           mListSPCsOther[i].spcStrValue,
                           textAlign: TextAlign.justify,
                           maxLines: 4,
-                          expandArrowStyle: ExpandArrowStyle.icon,
-                          arrowColor: Colors.orange,
+                          expandIndicatorStyle: ExpandIndicatorStyle.both,
+                          // expandArrowStyle: ExpandArrowStyle.icon,
+                          // arrowColor: Colors.orange,
                         ),
                   // ExpandablePanel(
                   //   header: Text("article.title"),

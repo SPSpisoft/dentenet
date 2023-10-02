@@ -1,8 +1,9 @@
 import 'dart:convert' as convert;
 import 'dart:convert';
-import 'package:eticon_api/eticon_api.dart';
+// import 'package:eticon_api/eticon_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:realm/realm.dart';
 
@@ -170,85 +171,138 @@ Future<RetPatientModelMap> putPatient(ClsPatientInfo clsPatientInfo) async {
   Map<String, dynamic> clsPatientJson = clsPatientToJson(
       clsPatientInfo);
   RetPatientModelMap retPatientModelMap = RetPatientModelMap();
-  try{
-    Response response = await Api.put('PutPatient',
-        body: clsPatientJson
-        , responseType: ResponseType.jsonResponse
-    );
 
-    // if(response.statusCode == 201){
-    //   // List<dynamic> nn = json.decode(error.body);
-    //   // retPatientModel.retList = json.decode(error.body);
-    //   retPatientModel.retList.add(ClsPatientInfoJ.fromJson(response.data.first));
-    // }else {
-    retPatientModelMap.retList.add(Map<String, dynamic>.from(
-          response.data.first));
-    retPatientModelMap.retCode = response.statusCode!;
+  // RetTrialObservation retTrialObservation = RetTrialObservation();
 
-    // }
-  } on APIException catch(error){
-    retPatientModelMap.retCode = error.code;
-    // if(error.code == 302){
-    //   // List<dynamic> nn = json.decode(error.body);
-    //   // retPatientModel.retList = json.decode(error.body);
-    //   retPatientModel.retList.add(ClsPatientInfoJ.fromJson(json.decode(error.body)[0]));
-    // }else {
-    if(error.body != null){
-      retPatientModelMap.retText = error.body;
+  // if (Globals.offlineMode) {
+  // } else {
+  var url = Uri.parse(
+      '${Globals.baseApiAddressDental}PutPatient/');
+
+  try {
+    final response = await http.put(
+      url,
+      body: json.encode(clsPatientJson),
+      headers: <String, String>{
+        'content-type': 'application/json',
+        'accept': 'application/json',
+        'authorization': 'Bearer ${Globals.myToken}',
+      },
+    ).timeout((const Duration(seconds: 10)));
+
+    retPatientModelMap.retCode = response.statusCode;
+
+    if (response.statusCode == 200) {
+      var json = convert.jsonDecode(response.body);
+
+      retPatientModelMap.retList.add(Map<String, dynamic>.from(
+          json));
+      retPatientModelMap.retCode = response.statusCode!;
+
+      // List<TrialObservation> mList = [];
+      // mList.add(TrialObservation.fromJson(json)..syncStatus = SyncStatus.sync);
+      //
+      // retTrialObservation.trialObservations = TrialObservations(
+      //     count: json["count"],
+      //     next: null,
+      //     previous: null,
+      //     trialObservationList: mList);
+    } else {
+      retPatientModelMap.retText = response.body;
     }
-
-    print('ERROR CODE: ${error.code}');
+  } catch (e) {
+    retPatientModelMap.retText = e.toString();
   }
-  // print('ret 0******************** : ${retPatientModelMap.retList.first["Age"]}');
+  // }
 
   return retPatientModelMap;
+
 }
 
-Future<RetPatientModelMap> putPatient1(Map<String, dynamic> clsPatientToJson) async {
-  RetPatientModelMap retPatientModelMap = RetPatientModelMap();
-  try{
-    Response response = await Api.put('PutPatient',
-        body: clsPatientToJson
-        , responseType: ResponseType.jsonResponse
-    );
+// Future<RetPatientModelMap> putPatientOld(ClsPatientInfo clsPatientInfo) async {
+//
+//   Map<String, dynamic> clsPatientJson = clsPatientToJson(
+//       clsPatientInfo);
+//   RetPatientModelMap retPatientModelMap = RetPatientModelMap();
+//   try{
+//     Response response = await Http.put('PutPatient',
+//         body: clsPatientJson
+//         , responseType: ResponseType.jsonResponse
+//     );
+//
+//     // if(response.statusCode == 201){
+//     //   // List<dynamic> nn = json.decode(error.body);
+//     //   // retPatientModel.retList = json.decode(error.body);
+//     //   retPatientModel.retList.add(ClsPatientInfoJ.fromJson(response.data.first));
+//     // }else {
+//     retPatientModelMap.retList.add(Map<String, dynamic>.from(
+//           response.data.first));
+//     retPatientModelMap.retCode = response.statusCode!;
+//
+//     // }
+//   } on APIException catch(error){
+//     retPatientModelMap.retCode = error.code;
+//     // if(error.code == 302){
+//     //   // List<dynamic> nn = json.decode(error.body);
+//     //   // retPatientModel.retList = json.decode(error.body);
+//     //   retPatientModel.retList.add(ClsPatientInfoJ.fromJson(json.decode(error.body)[0]));
+//     // }else {
+//     if(error.body != null){
+//       retPatientModelMap.retText = error.body;
+//     }
+//
+//     print('ERROR CODE: ${error.code}');
+//   }
+//   // print('ret 0******************** : ${retPatientModelMap.retList.first["Age"]}');
+//
+//   return retPatientModelMap;
+// }
 
-    // if(response.statusCode == 201){
-    //   // List<dynamic> nn = json.decode(error.body);
-    //   // retPatientModel.retList = json.decode(error.body);
-    //   retPatientModel.retList.add(ClsPatientInfoJ.fromJson(response.data.first));
-    // }else {
-    retPatientModelMap.retList.add(Map<String, dynamic>.from(
-        response.data.first));
-    retPatientModelMap.retCode = response.statusCode!;
+// Future<RetPatientModelMap> putPatient1(Map<String, dynamic> clsPatientToJson) async {
+//   RetPatientModelMap retPatientModelMap = RetPatientModelMap();
+//   try{
+//     Response response = await Api.put('PutPatient',
+//         body: clsPatientToJson
+//         , responseType: ResponseType.jsonResponse
+//     );
+//
+//     // if(response.statusCode == 201){
+//     //   // List<dynamic> nn = json.decode(error.body);
+//     //   // retPatientModel.retList = json.decode(error.body);
+//     //   retPatientModel.retList.add(ClsPatientInfoJ.fromJson(response.data.first));
+//     // }else {
+//     retPatientModelMap.retList.add(Map<String, dynamic>.from(
+//         response.data.first));
+//     retPatientModelMap.retCode = response.statusCode!;
+//
+//     // }
+//   } on APIException catch(error){
+//     retPatientModelMap.retCode = error.code;
+//     // if(error.code == 302){
+//     //   // List<dynamic> nn = json.decode(error.body);
+//     //   // retPatientModel.retList = json.decode(error.body);
+//     //   retPatientModel.retList.add(ClsPatientInfoJ.fromJson(json.decode(error.body)[0]));
+//     // }else {
+//     retPatientModelMap.retText = error.body;
+//     // }
+//
+//     print('ERROR CODE: ${error.code}');
+//   }
+//   print('ret 0******************** : ${retPatientModelMap.retList.first["Age"]}');
+//
+//   return retPatientModelMap;
+// }
 
-    // }
-  } on APIException catch(error){
-    retPatientModelMap.retCode = error.code;
-    // if(error.code == 302){
-    //   // List<dynamic> nn = json.decode(error.body);
-    //   // retPatientModel.retList = json.decode(error.body);
-    //   retPatientModel.retList.add(ClsPatientInfoJ.fromJson(json.decode(error.body)[0]));
-    // }else {
-    retPatientModelMap.retText = error.body;
-    // }
-
-    print('ERROR CODE: ${error.code}');
-  }
-  print('ret 0******************** : ${retPatientModelMap.retList.first["Age"]}');
-
-  return retPatientModelMap;
-}
-
-Future<Map<String, dynamic>> putPatient0(Map<String, dynamic> clsPatientToJson) async {
-  Map<String, dynamic> response = Map();
-  try{
-    response = await Api.put('PutPatient', body: clsPatientToJson
-    );
-  } on APIException catch(error){
-    print('ERROR CODE: ${error.code}');
-  }
-  return response;
-}
+// Future<Map<String, dynamic>> putPatient0(Map<String, dynamic> clsPatientToJson) async {
+//   Map<String, dynamic> response = Map();
+//   try{
+//     response = await Api.put('PutPatient', body: clsPatientToJson
+//     );
+//   } on APIException catch(error){
+//     print('ERROR CODE: ${error.code}');
+//   }
+//   return response;
+// }
 
 Future<RetPatientModel> fetchPatients(String mID, String mName, {bool onLike = false}) async {
   late Realm realm;
